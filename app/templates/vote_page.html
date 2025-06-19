@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Cast Your Vote{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Cast Your Vote</h2>
+    <form method="post">
+        {% for position, candidates in candidates.items() %}
+            <h4 class="mt-4">{{ position }}</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Photo</th>
+                            <th>Manifesto</th>
+                            <th>Vote</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for candidate in candidates %}
+                        <tr>
+                            <td>{{ candidate.name }}</td>
+                            <td>
+                                <img src="{{ url_for('static', filename='photos/' ~ candidate.photo) }}"
+                                     width="100" class="img-thumbnail">
+                            </td>
+                            <td>{{ candidate.manifesto }}</td>
+                            <td class="text-center">
+                                <input type="radio" name="{{ position }}" value="{{ candidate.id }}" required>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Submit Vote</button>
+
+        <!-- Flash message shown BELOW the form -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ 'danger' if category == 'error' else category }} mt-4" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endwith %}
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Voting Results{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Real-Time Voting Results</h2>
+
+    {% for position, votes in results.items() %}
+        <h4 class="mt-4">{{ position }}</h4>
+
+        {% if votes %}
+            {% set total_votes = votes | map(attribute=2) | sum %}
+            {% set max_votes = votes | map(attribute=2) | max %}
+
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Candidate</th>
+                            <th>Photo</th>
+                            <th>Total Votes</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for name, photo, count in votes %}
+                        <tr class="{% if count == max_votes %}table-success{% endif %}">
+                            <td>{{ name }}</td>
+                            <td>
+                                <img src="{{ url_for('static', filename='photos/' ~ photo) }}" width="80" class="img-thumbnail">
+                            </td>
+                            <td>{{ count }}</td>
+                            <td>{{ '%.2f' % ((count / total_votes) * 100) }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted">No votes yet for this position.</p>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

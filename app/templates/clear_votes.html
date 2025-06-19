@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Confirm Clear Votes{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4 col-md-6 mx-auto">
+    <h2 class="mb-4 text-danger">Clear All Votes</h2>
+    <p>This action will permanently delete all cast votes and reset all voters. You must enter the admin password to proceed.</p>
+
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Enter Admin Password</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Confirm and Clear Votes</button>
+        <a href="{{ url_for('main.admin_dashboard') }}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

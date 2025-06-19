@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Edit Candidate{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4 col-md-8 mx-auto">
+    <h2 class="mb-4">Edit Candidate Details</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" value="{{ candidate.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Position</label>
+            <select name="position" class="form-select" required>
+                <option {% if candidate.position == 'Chairman' %}selected{% endif %}>Chairman</option>
+                <option {% if candidate.position == 'Secretary General' %}selected{% endif %}>Secretary General</option>
+                <option {% if candidate.position == 'Treasurer' %}selected{% endif %}>Treasurer</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Manifesto</label>
+            <textarea name="manifesto" class="form-control" required>{{ candidate.manifesto }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Current Photo</label><br>
+            <img src="{{ url_for('static', filename='photos/' ~ candidate.photo) }}" width="120" class="img-thumbnail mb-2">
+            <input type="file" name="photo" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Candidate</button>
+        <a href="{{ url_for('main.view_candidates') }}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

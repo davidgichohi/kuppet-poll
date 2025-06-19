@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}View TSC Members{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Registered TSC Members</h2>
+
+    {% if voters %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>TSC Number</th>
+                        <th>Voted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for voter in voters %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ voter.tsc_number }}</td>
+                        <td>
+                            {% if voter.voted %}
+                                <span class="badge bg-success">Yes</span>
+                            {% else %}
+                                <span class="badge bg-danger">No</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No TSC members registered yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

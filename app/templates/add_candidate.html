@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Add Candidate{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4 col-md-8 mx-auto">
+    <h2 class="mb-4">Add New Candidate</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Position</label>
+            <select name="position" class="form-select" required>
+                <option>Chairman</option>
+                <option>Secretary General</option>
+                <option>Treasurer</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Manifesto</label>
+            <textarea name="manifesto" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Photo</label>
+            <input type="file" name="photo" class="form-control" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Candidate</button>
+    </form>
+</div>
+{% endblock %}

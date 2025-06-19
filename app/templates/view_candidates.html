@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}View Candidates{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Registered Candidates</h2>
+
+    {% if candidates %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Photo</th>
+                    <th>Position</th>
+                    <th>Manifesto</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in candidates %}
+                <tr>
+                    <td>{{ c.name }}</td>
+                    <td>
+                        <img src="{{ url_for('static', filename='photos/' ~ c.photo) }}" width="80" class="img-thumbnail">
+                    </td>
+                    <td>{{ c.position }}</td>
+                    <td>{{ c.manifesto[:100] }}...</td>
+                    <td class="text-nowrap">
+                        <a href="{{ url_for('main.edit_candidate', candidate_id=c.id) }}" class="btn btn-sm btn-primary me-1">Edit</a>
+                        <form method="post" action="{{ url_for('main.delete_candidate', candidate_id=c.id) }}" 
+                              style="display:inline;" 
+                              onsubmit="return confirm('Are you sure you want to delete this candidate?');">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No candidates found.</p>
+    {% endif %}
+</div>
+{% endblock %}

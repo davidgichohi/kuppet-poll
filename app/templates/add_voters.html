@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Add TSC Members{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4 col-md-8 mx-auto">
+    <h2 class="mb-4">Add TSC Members</h2>
+
+    <form method="post" class="mb-4">
+        <label class="form-label">Add Individual TSC Number</label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="tsc_number" placeholder="Enter TSC Number" required>
+            <button class="btn btn-primary" type="submit">Add</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <form method="post" enctype="multipart/form-data">
+        <label class="form-label">Bulk Upload via CSV</label>
+        <div class="input-group mb-3">
+            <input type="file" name="csv_file" class="form-control" accept=".csv" required>
+            <button class="btn btn-secondary" type="submit">Upload</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

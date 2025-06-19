@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Welcome, Admin</h2>
+    <a href="{{ url_for('main.add_candidate') }}" class="btn btn-outline-primary me-3">Add Candidate</a>
+    <a href="{{ url_for('main.view_votes') }}" class="btn btn-outline-success">View Votes</a>
+    <a href="{{ url_for('main.clear_votes') }}">🧨 Clear All Votes</a>
+</div>
+{% endblock %}

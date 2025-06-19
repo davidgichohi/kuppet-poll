@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Login to Vote{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Login to Vote</h2>
+    <form method="post">
+        <div class="mb-3">
+            <label for="tsc_number" class="form-label">TSC Number</label>
+            <input type="text" class="form-control" name="tsc_number" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Proceed</button>
+    </form>
+</div>
+{% endblock %}
